@@ -22,14 +22,6 @@ for i=1:length(encoded)
 end
 fprintf("\n");
 
-% Przejscie przez kanal transmisyjny
-corrupted = BSCChannel(encoded, errorProbabilityBSC);
-fprintf("Corrupted:\n");
-for i=1:length(corrupted)
-    fprintf('%d ', corrupted(i));
-end
-fprintf("\n");
-
 
 % Dekodowanie sygnalu
 [decoded,errorCount] = parityBitDecoder(corrupted, packageSize);
