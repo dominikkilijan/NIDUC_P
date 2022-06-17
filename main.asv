@@ -1,6 +1,4 @@
 clc;
-
-errorProbabilityBSC = 0.5;
 % Generowanie sygnalu
 lengSig = 16;
 packageSize = 4;
@@ -22,19 +20,10 @@ for i=1:length(encoded)
 end
 fprintf("\n");
 
-% Przejscie przez kanal transmisyjny
-corrupted = BSCChannel(encoded, errorProbabilityBSC);
-fprintf("Corrupted:\n");
-for i=1:length(corrupted)
-    fprintf('%d ', corrupted(i));
-end
-fprintf("\n");
-
-
-% Dekodowanie sygnalu
-[decoded,errorCount] = parityBitDecoder(corrupted, packageSize);
+%Dekodowanie sygnalu
+[corrupted,errorCount] = parityBitDecoder(encoded, packageSize);
 fprintf("Encoded:\n");
-for i=1:length(decoded)
+for i=1:length(corrupted)
     fprintf('%d ', decoded(i));
     if mod(i,packageSize) == 0
         fprintf('  ');
@@ -43,6 +32,5 @@ end
 fprintf("\n");
 fprintf("Error Count = %d\n", errorCount);
 
-[allErrors, ErrorPercent] = biterr(encoded, corrupted);
-fprintf("Skutecznosc = %f%%\n", errorCount/allErrors*100);
+
 
