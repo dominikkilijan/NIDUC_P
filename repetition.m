@@ -1,11 +1,11 @@
 function repetition(whichModel)
 clc;
 
-lengSig = 16;
+lengthOfSignal = 16;
 numberOfRepetitions = 3;
 
 % Generowanie sygnalu
-signal = randi([0,1],1,lengSig);
+signal = randi([0,1],1,lengthOfSignal);
 fprintf("Signal:\n");
 for i=1:length(signal)
     fprintf('%d ', signal(i));

@@ -1,6 +1,6 @@
 clc;
 
-whichMethod = 1;
+whichMethod = 2;
 whichModel = 1;
 
 switch whichMethod

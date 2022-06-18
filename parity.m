@@ -3,11 +3,11 @@ function parity(whichModel)
 %   whichModel - 1. Model BSC 2. Model Gilberta
 
 clc;
-lengSig = 16;
+lengthOfSignal = 16;
 packageSize = 4;
 
 % Generowanie sygnalu
-signal = randi([0,1],1,lengSig);
+signal = randi([0,1],1,lengthOfSignal);
 fprintf("Signal:\n");
 for i=1:length(signal)
     fprintf('%d ', signal(i));
