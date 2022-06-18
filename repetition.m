@@ -24,9 +24,7 @@ end
 fprintf("\n");
 
 % Przejscie przez kanal transmisyjny
-if whichModel == 1
-    corrupted = BSCChannel(encoded);
-end
+corrupted = transmitSignal(encoded, whichModel);
 fprintf("Corrupted:\n");
 for i=1:length(corrupted)
     fprintf('%d ', corrupted(i));
@@ -42,15 +40,15 @@ fprintf("Decoded:\n");
 for i=1:length(decoded)
     fprintf('%d ', decoded(i));
 end
-fprintf("\n");
+fprintf("\n\n");
 
 % Wyniki
-[allErrors] = biterr(encoded, corrupted);
-fprintf("Niewykryte bledy w corrupted = %f\n", allErrors);
+%[allErrors] = biterr(encoded, corrupted);
+%fprintf("Bledy w corrupted = %f\n", allErrors);
+%encodedBER = allErrors/length(encoded)*100;
+%fprintf("BER dla encoded-corrupted = %f%%\n", encodedBER);
 [undetectedErrors] = biterr(signal, decoded);
 fprintf("Niewykryte bledy w decoded = %f\n", undetectedErrors);
-encodedBER = allErrors/length(encoded)*100;
-fprintf("BER dla encoded-corrupted = %f%%\n", encodedBER);
 decodedBER = undetectedErrors/length(decoded)*100;
 fprintf("BER dla decoded-signal = %f%%\n", decodedBER);
 

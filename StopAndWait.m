@@ -15,9 +15,7 @@ decodedSignal = [];
 corrupted = [];
 while ~isempty(signal)
     % Przejscie przez kanal transmisyjny
-    if whichModel == 1
-        corrupted = BSCChannel(signal(1:packageSize+1));
-    end
+    corrupted = transmitSignal(signal(1:packageSize+1), whichModel);
     fprintf("Corrupted:\t");
     for i=1:length(corrupted)
     fprintf('%d ', corrupted(i));
