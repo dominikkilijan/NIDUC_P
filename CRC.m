@@ -1,6 +1,4 @@
-function parity(whichModel)
-%PARITY Symulacja kodu parzystosci
-%   whichModel - 1. Model BSC 2. Model Gilberta
+function CRC(whichModel)
 
 clc;
 lengthOfSignal = 16;
@@ -18,7 +16,7 @@ end
 
 % Kodowanie sygnalu
 fprintf("\n");
-encoded = parityBitEncoder(signal, packageSize);
+encoded = CRCCoder(signal);
 fprintf("Encoded:\n");
 for i=1:length(encoded)
     fprintf('%d ', encoded(i));
@@ -26,14 +24,13 @@ end
 fprintf("\n");
 
 % Zaklocanie i dekodowanie
-[corrupted, decoded, numberOfResends] = StopAndWait(encoded, packageSize, whichModel, 1);
+[corrupted, decoded, numberOfResends] = StopAndWait(encoded, packageSize, whichModel, 2);
 
 fprintf("Corrupted:\n");
 for i=1:length(corrupted)
     fprintf('%d ', corrupted(i));
 end
 fprintf("\n");
-
 
 fprintf("Decoded:\n");
 for i=1:length(decoded)
@@ -44,25 +41,24 @@ for i=1:length(decoded)
 end
 fprintf("\n");
 
-
-% corrupted = BSCChannel(encoded);
-%     fprintf("Corrupted:\n");
-%     for i=1:length(corrupted)
-%     fprintf('%d ', corrupted(i));
-%     end
-%     fprintf("\n");
-% 
+%  corrupted = BSCChannel(encoded);
+%      fprintf("Corrupted:\n");
+%      for i=1:length(corrupted)
+%      fprintf('%d ', corrupted(i));
+%      end
+%      fprintf("\n");
+%  
 % % Dekodowanie sygnalu
-% [decoded,errorCount] = parityBitDecoder(corrupted, packageSize);
+% [decoded,errorCount] = CRCDecoder(corrupted);
 % fprintf("Encoded:\n");
-% for i=1:length(decoded)
-%     fprintf('%d ', decoded(i));
-%     if mod(i,packageSize) == 0
-%         fprintf('  ');
-%     end
-% end
-% fprintf("\n");
-% fprintf("Error Count = %d\n", errorCount);
+%  for i=1:length(decoded)
+%      fprintf('%d ', decoded(i));
+%      if mod(i,packageSize) == 0
+%          fprintf('  ');
+%      end
+%  end
+%  fprintf("\n");
+%  fprintf("Error Count = %d\n", errorCount);
 
 % Wyniki
 fprintf("Liczba ponownych przesylow pakietow = %f\n", numberOfResends);
