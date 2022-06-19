@@ -6,7 +6,7 @@ function [corrupted] = gilbertChannel(signal)
 
 state = 0;      % 0 - stan dobry, 1 - stan zly
 p_dz = 0.15;    % prawdopodobienstwo przejscia dobry -> zly
-p_zd = 0.35;     % prawdopodobienstwo przejscia zly -> dobry
+p_zd = 0.45;     % prawdopodobienstwo przejscia zly -> dobry
 signalLength = length(signal);
 corrupted = [];
 

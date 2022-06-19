@@ -26,7 +26,7 @@ end
 fprintf("\n");
 
 % Zaklocanie i dekodowanie
-[corrupted, decoded, numberOfResends] = stopAndWait(encoded, packageSize, whichModel);
+[corrupted, decoded, numberOfResends] = StopAndWait(encoded, packageSize, whichModel);
 
 fprintf("Corrupted:\n");
 for i=1:length(corrupted)
