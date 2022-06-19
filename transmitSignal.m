@@ -9,7 +9,7 @@ corrupted = [];
 if whichModel == 1
     corrupted = BSCChannel(signal);
 elseif whichModel == 2
-    % wywolanie gilberta
+    corrupted = gilbertChannel(signal);
 else
     printf("Nieprawidlowa wartosc whichModel!\n");
 end
