@@ -1,7 +1,7 @@
 clc;
 
-whichMethod = 3;    % 1. Parity 2. Dublowanie 3. CRC
-whichModel = 2;     % 1. Model BSC 2. Model Gilberta
+whichMethod = 2;    % 1. Parity 2. Dublowanie 3. CRC
+whichModel = 1;     % 1. Model BSC 2. Model Gilberta
 timeElapsed = 0;
 switch whichMethod
     case 1

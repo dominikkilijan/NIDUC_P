@@ -1,10 +1,13 @@
-function [decoded_signal, error] = CRCDecoder(signal)
+function [decodedSignal, error] = CRCDecoder(signal)
+%CRCDECODER Funkcja do dekodowania w modelu CRC32
+%   signal - sygnal do zdekodowania
+%   encodedSignal - zdekodowany sygnal
 
-signal_length = length(signal);
-decoded_signal = signal(1:signal_length-32);
-sum_copy = signal(signal_length-31:signal_length);
-signal = CRCCoder(signal(1:signal_length - 32));
-if sum_copy == signal(signal_length-31:signal_length)
+signalLength = length(signal);
+decodedSignal = signal(1:signalLength-32);
+sumCopy = signal(signalLength-31:signalLength);
+signal = CRCCoder(signal(1:signalLength - 32));
+if sumCopy == signal(signalLength-31:signalLength)
     error = 0;
 else 
     error = 1;

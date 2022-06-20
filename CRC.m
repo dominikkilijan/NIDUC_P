@@ -1,4 +1,6 @@
 function CRC(whichModel)
+%CRC Symulacja kodu CRC
+%   whichModel - 1. Model BSC 2. Model Gilberta
 
 clc;
 lengthOfSignal = 16;
