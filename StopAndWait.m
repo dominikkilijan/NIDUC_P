@@ -1,4 +1,4 @@
-function [corruptedSignal, decodedSignal, numberOfResends] = stopAndWait(signal, packageSize, whichModel, whichDecoder)
+function [corruptedSignal, decodedSignal, numberOfResends] = StopAndWait(signal, packageSize, whichModel, whichDecoder)
 %STOPANDWAIT Protokol Stop-And-Wait
 %   signal - sygnal do przeslania
 %   packageSize - ile bitow miesci sie w jednym pakiecie
@@ -8,7 +8,7 @@ function [corruptedSignal, decodedSignal, numberOfResends] = stopAndWait(signal,
 %   decodedSignal - caly odkodowany sygnal
 %   numberOfResends - ile razy nalezalo ponownie wyslac pakiet, takze ile
 %   razy zostal wykryty blad
-maxRepeats = 10;
+maxRepeats = 100;
 numberOfResends = 0;
 
 corruptedSignal = [];
@@ -20,7 +20,7 @@ while ~isempty(signal)
         corrupted = transmitSignal(signal(1:packageSize+1), whichModel);
     else
         if whichDecoder == 2
-            corrupted = transmitSignal(signal(1:packageSize), whichModel);
+            corrupted = transmitSignal(signal(1:packageSize+32), whichModel);
         end
     end
     fprintf("Corrupted:\t");
@@ -34,7 +34,7 @@ while ~isempty(signal)
         [decoded, errorCount] = parityBitDecoder(corrupted(1:packageSize+1), packageSize);
     else
         if whichDecoder == 2
-            [decoded, errorCount] = CRCDecoder(corrupted(1:packageSize));
+            [decoded, errorCount] = CRCDecoder(corrupted(1:packageSize+32));
         end
     end
     %fprintf("Error Count = %d\n", errorCount);
@@ -42,7 +42,13 @@ while ~isempty(signal)
         fprintf("Ok\n");
         corruptedSignal = [corruptedSignal corrupted];
         decodedSignal = [decodedSignal decoded];
-        signal(1:packageSize+1) = []; % Usuwanie wyslanego pakietu
+        if whichDecoder == 1
+            signal(1:packageSize+1) = []; % Usuwanie wyslanego pakietu
+        else
+            if whichDecoder == 2
+            signal(1:packageSize) = []; % Usuwanie wyslanego pakietu
+            end
+        end
         maxRepeats = 10;
     else
         if maxRepeats == 0 

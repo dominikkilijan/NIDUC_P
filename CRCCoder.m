@@ -5,7 +5,5 @@ crc32 = comm.CRCGenerator('Polynomial', poly);
 signal = signal.';
 encoded_signal = crc32(signal);
 encoded_signal = encoded_signal.';
-fprintf("Encoded_signal w koderze:\n");
-disp(encoded_signal);
 
 end
